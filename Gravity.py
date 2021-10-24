@@ -1,7 +1,8 @@
 import csv
+import plotly.express as px
 
 rows = []
-with open('main.csv','r') as f:
+with open('total_stars.csv','r') as f:
     csvreader = csv.reader(f)
     for row in csvreader:
         rows.append(row)
@@ -20,6 +21,7 @@ star_masses = []
 star_names = []
 star_radius = []
 star = []
+
 
 for star_data in star_data_rows:
     star_masses.append(star_data[3])
@@ -48,3 +50,27 @@ for index , gravity in enumerate(star_gravity):
     low_gravity_star.append(star_data_rows[index])
 
 print(len(low_gravity_star))
+
+
+#Define star name
+
+star_name = []
+star_name.append(star_data[1])
+
+#Plotting Mass
+
+for planet_data in low_gravity_star:
+  star_masses.append(planet_data[3])
+
+
+fig = px.scatter(x = star_name , y = star_masses)
+fig.show()
+
+#Plotting Radius
+
+for planet_data in low_gravity_star:
+  star_radius.append(star_data[5])
+
+
+fig = px.scatter(x = star_name , y = star_radius)
+fig.show()
